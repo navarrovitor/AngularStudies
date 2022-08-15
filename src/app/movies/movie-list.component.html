@@ -6,12 +6,12 @@
     <div class="row">
       <div class="col-md-2">Filter by:</div>
       <div class="col-md-4">
-        <input type="text" />
+        <input [(ngModel)]="listFilter" type="text" />
       </div>
     </div>
     <div class="row">
       <div class="col-md-6">
-        <h4>Filtered by:</h4>
+        <h4>Filtered by: {{ listFilter }}</h4>
       </div>
     </div>
     <div class="table-responsive">
@@ -19,7 +19,9 @@
         <thead>
           <tr>
             <th>
-              <button class="btn btn-primary">Show poster</button>
+              <button class="btn btn-primary" (click)="toggleImage()">
+                {{ showImage ? "Hide" : "Show" }} poster
+              </button>
             </th>
             <th>Movie</th>
             <th>Duration</th>
@@ -28,11 +30,19 @@
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let movie of movies">
-            <td></td>
-            <td>{{ movie.name }}</td>
-            <td>{{ movie.duration }}</td>
-            <td>{{ movie.boring }}</td>
+          <tr *ngFor="let movie of filteredMovies">
+            <td>
+              <img
+                *ngIf="showImage"
+                [src]="movie.imageUrl"
+                [title]="movie.name"
+                [style.width.px]="imageWidth"
+                [style.margin.px]="imageMargin"
+              />
+            </td>
+            <td>{{ movie.name | uppercase }}</td>
+            <td>{{ movie.duration | customTime: ":" }}</td>
+            <td>{{ movie.boring ? "yup" : "nah" }}</td>
             <td>{{ movie.rating }}</td>
           </tr>
         </tbody>
