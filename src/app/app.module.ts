@@ -5,9 +5,15 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppComponent } from './app.component';
 import { MovieListComponent } from './movies/movie-list.component';
 import { CustomTimePipe } from './shared/custom-time.pipe';
+import { StarComponent } from './shared/star.component';
 
 @NgModule({
-  declarations: [AppComponent, MovieListComponent, CustomTimePipe],
+  declarations: [
+    AppComponent,
+    MovieListComponent,
+    CustomTimePipe,
+    StarComponent,
+  ],
   imports: [BrowserModule, FormsModule],
   providers: [],
   bootstrap: [AppComponent],

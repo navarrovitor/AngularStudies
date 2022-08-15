@@ -7,10 +7,10 @@ import { IMovie } from './movie';
   styleUrls: ['./movie-list.component.css'],
 })
 export class MovieListComponent implements OnInit {
-  pageTitle = 'Movie List';
+  pageTitle = '';
   imageWidth = 100;
   imageMargin = 2;
-  showImage = false;
+  showImage = true;
 
   private _listFilter: string = '';
 
@@ -20,7 +20,6 @@ export class MovieListComponent implements OnInit {
 
   set listFilter(value: string) {
     this._listFilter = value;
-    console.log('filter: ', value);
     this.filteredMovies = this.doFilter(value);
   }
 
@@ -34,7 +33,7 @@ export class MovieListComponent implements OnInit {
       name: 'Pulp Fiction',
       duration: '2:34',
       boring: false,
-      rating: '4.8',
+      rating: 4.5,
     },
     {
       id: 2,
@@ -43,7 +42,7 @@ export class MovieListComponent implements OnInit {
       name: 'The Maze Runner',
       duration: '1:53',
       boring: false,
-      rating: '4',
+      rating: 3.7,
     },
   ];
 
@@ -59,6 +58,11 @@ export class MovieListComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    console.log('initialized');
+    this.movies = this.movies;
+    this.filteredMovies = this.movies;
+  }
+
+  onRatingClicked(message: string): void {
+    this.pageTitle = message;
   }
 }

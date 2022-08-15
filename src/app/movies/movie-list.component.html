@@ -43,7 +43,12 @@
             <td>{{ movie.name | uppercase }}</td>
             <td>{{ movie.duration | customTime: ":" }}</td>
             <td>{{ movie.boring ? "yup" : "nah" }}</td>
-            <td>{{ movie.rating }}</td>
+            <td>
+              <mc-star
+                [rating]="movie.rating"
+                (ratingClicked)="onRatingClicked($event)"
+              ></mc-star>
+            </td>
           </tr>
         </tbody>
       </table>

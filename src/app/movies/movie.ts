@@ -4,5 +4,5 @@ export interface IMovie {
   name: string;
   duration: string;
   boring: boolean;
-  rating: string;
+  rating: number;
 }
