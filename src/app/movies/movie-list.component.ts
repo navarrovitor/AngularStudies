@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { IMovie } from './movie';
+import { MovieService } from './movie.service';
 
 @Component({
   selector: 'mc-movies',
@@ -25,26 +26,9 @@ export class MovieListComponent implements OnInit {
 
   filteredMovies: IMovie[] = [];
 
-  movies: IMovie[] = [
-    {
-      id: 1,
-      imageUrl:
-        'https://upload.wikimedia.org/wikipedia/pt/8/82/Pulp_Fiction_cover.jpg',
-      name: 'Pulp Fiction',
-      duration: '2:34',
-      boring: false,
-      rating: 4.5,
-    },
-    {
-      id: 2,
-      imageUrl:
-        'https://www.themoviedb.org/t/p/original/ode14q7WtDugFDp78fo9lCsmay9.jpg',
-      name: 'The Maze Runner',
-      duration: '1:53',
-      boring: false,
-      rating: 3.7,
-    },
-  ];
+  movies: IMovie[] = [];
+
+  constructor(private movieService: MovieService) {}
 
   doFilter(filterBy: string): IMovie[] {
     filterBy = filterBy.toLocaleLowerCase();
@@ -58,7 +42,7 @@ export class MovieListComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.movies = this.movies;
+    this.movies = this.movieService.getMovies();
     this.filteredMovies = this.movies;
   }
 
