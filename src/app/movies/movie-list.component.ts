@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Subscription } from 'rxjs';
 import { IMovie } from './movie';
 import { MovieService } from './movie.service';
 
@@ -7,11 +8,13 @@ import { MovieService } from './movie.service';
   templateUrl: './movie-list.component.html',
   styleUrls: ['./movie-list.component.css'],
 })
-export class MovieListComponent implements OnInit {
+export class MovieListComponent implements OnInit, OnDestroy {
   pageTitle = '';
   imageWidth = 100;
   imageMargin = 2;
   showImage = true;
+  errorMessage: string = '';
+  sub!: Subscription;
 
   private _listFilter: string = '';
 
@@ -42,8 +45,17 @@ export class MovieListComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.movies = this.movieService.getMovies();
-    this.filteredMovies = this.movies;
+    this.sub = this.movieService.getMovies().subscribe({
+      next: (movies) => {
+        this.movies = movies;
+        this.filteredMovies = this.movies;
+      },
+      error: (err) => (this.errorMessage = err),
+    });
+  }
+
+  ngOnDestroy(): void {
+    this.sub.unsubscribe();
   }
 
   onRatingClicked(message: string): void {
