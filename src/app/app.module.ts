@@ -10,6 +10,7 @@ import { StarComponent } from './shared/star.component';
 import { MovieDetailComponent } from './movies/movie-detail.component';
 import { WelcomeComponent } from './home/welcome.component';
 import { RouterModule } from '@angular/router';
+import { MovieDetailGuard } from './movies/movie-detail.guard';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,11 @@ import { RouterModule } from '@angular/router';
     HttpClientModule,
     RouterModule.forRoot([
       { path: 'movies', component: MovieListComponent },
-      { path: 'movies/:id', component: MovieDetailComponent },
+      {
+        path: 'movies/:id',
+        canActivate: [MovieDetailGuard],
+        component: MovieDetailComponent,
+      },
       { path: 'welcome', component: WelcomeComponent },
       { path: '', redirectTo: 'welcome', pathMatch: 'full' },
       { path: '**', redirectTo: 'welcome', pathMatch: 'full' },

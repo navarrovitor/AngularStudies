@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
+import { IMovie } from './movie';
 
 @Component({
   templateUrl: './movie-detail.component.html',
@@ -6,8 +8,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MovieDetailComponent implements OnInit {
   pageTitle: string = 'Movie detail';
+  movie: IMovie | undefined;
 
-  constructor() {}
+  constructor(private route: ActivatedRoute, private router: Router) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    const id = Number(this.route.snapshot.paramMap.get('id'));
+  }
+
+  onBack(): void {
+    this.router.navigate(['/movies']);
+  }
 }

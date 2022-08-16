@@ -40,7 +40,9 @@
                 [style.margin.px]="imageMargin"
               />
             </td>
-            <td>{{ movie.name | uppercase }}</td>
+            <td>
+              <a [routerLink]="['/movies', movie.id]"> {{ movie.name | uppercase }}</a>
+            </td>
             <td>{{ movie.duration | customTime: ":" }}</td>
             <td>{{ movie.boring ? "yup" : "nah" }}</td>
             <td>
