@@ -4,12 +4,11 @@ import { IMovie } from './movie';
 import { MovieService } from './movie.service';
 
 @Component({
-  selector: 'mc-movies',
   templateUrl: './movie-list.component.html',
   styleUrls: ['./movie-list.component.css'],
 })
 export class MovieListComponent implements OnInit, OnDestroy {
-  pageTitle = '';
+  pageTitle = 'Movie List';
   imageWidth = 100;
   imageMargin = 2;
   showImage = true;
