@@ -1,7 +1,7 @@
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { IMovie } from './movie';
-import { Observable, catchError, tap, throwError } from 'rxjs';
+import { Observable, catchError, tap, throwError, map } from 'rxjs';
 
 @Injectable({ providedIn: 'root' })
 export class MovieService {
@@ -12,6 +12,12 @@ export class MovieService {
     return this.http.get<IMovie[]>(this.movieUrl).pipe(
       tap((data) => console.log('All', JSON.stringify(data))),
       catchError(this.handleError)
+    );
+  }
+
+  getMovie(id: number): Observable<IMovie | undefined> {
+    return this.getMovies().pipe(
+      map((movies: IMovie[]) => movies.find((p) => p.id === id))
     );
   }
 

@@ -2,13 +2,48 @@
   <div class="card-header">
     {{ pageTitle + ": " + movie?.name }}
   </div>
-  <div class="card-footer">
-    <button
-      class="btn btn-outline-secondary"
-      style="width: 80px"
-      (click)="onBack()"
-    >
-      <i class="fa fa-chevron-left"></i>Back
-    </button>
+
+  <div class="card-body" *ngIf="movie">
+    <div class="row">
+      <div class="col-md-8">
+        <div class="row">
+          <div class="col-md-4">Name:</div>
+          <div class="col-md-8">{{ movie.name }}</div>
+        </div>
+        <div class="row">
+          <div class="col-md-4">Duration:</div>
+          <div class="col-md-8">{{ movie.duration | customTime: ":" }}</div>
+        </div>
+        <div class="row">
+          <div class="col-md-4">Boring?</div>
+          <div class="col-md-8">{{ movie.boring ? "yup" : "nah" }}</div>
+        </div>
+        <div class="row">
+          <div class="col-md-4">5 Star Rating:</div>
+          <div class="col-md-8">
+            <mc-star [rating]="movie.rating"> </mc-star>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <img
+          class="center-block img-responsive"
+          [style.width.px]="200"
+          [style.margin.px]="2"
+          [src]="movie.imageUrl"
+          [title]="movie.name"
+        />
+      </div>
+    </div>
+    <div class="card-footer">
+      <button
+        class="btn btn-outline-secondary"
+        style="width: 80px"
+        (click)="onBack()"
+      >
+        <i class="fa fa-chevron-left"></i>Back
+      </button>
+    </div>
   </div>
 </div>
